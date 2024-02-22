@@ -17,28 +17,28 @@ stages:
     - job: FirstJob
       steps: 
       - bash: echo Build First Job
-      - bash: echo $(PipelineLevelVariable)
+      - bash: echo Directory Artifact $(Build.ArtifactStagingDirectory)
     - job: SecondJob
       steps: 
       - bash: echo Build First Job 
-  - stage: DevDeploy
-    dependsOn: Build
-    jobs: 
-    - job: DevDeployJob
-      steps: 
-      - bash: echo $(envoroment)DevDeployJob
-  - stage: QADeploy
-    dependsOn: Build
-    jobs: 
-    - job: QADeployJob
-      steps: 
-      - bash: echo QADeployJob
-  - stage: ProdDeploy
-    dependsOn: 
-    - Build
-    - DevDeploy
-    - QADeploy
-    jobs: 
-    - job: ProdDeploy
-      steps: 
-      - bash: echo ProdDeploy
+  # - stage: DevDeploy
+  #   dependsOn: Build
+  #   jobs: 
+  #   - job: DevDeployJob
+  #     steps: 
+  #     - bash: echo $(envoroment)DevDeployJob
+  # - stage: QADeploy
+  #   dependsOn: Build
+  #   jobs: 
+  #   - job: QADeployJob
+  #     steps: 
+  #     - bash: echo QADeployJob
+  # - stage: ProdDeploy
+  #   dependsOn: 
+  #   - Build
+  #   - DevDeploy
+  #   - QADeploy
+  #   jobs: 
+  #   - job: ProdDeploy
+  #     steps: 
+  #     - bash: echo ProdDeploy
