@@ -20,6 +20,8 @@ stages:
       - bash: echo Directory Artifact $(Build.ArtifactStagingDirectory) 
       - bash: echo Enviroment Name $(Environment.Name)
       - bash: echo AccessToken Enviroment $(System.AccessToken)
+      - bash: echo Build Id $(Build.BuildId)
+      - bash: echo Build Number $(Build.BuildNumber)
     - job: SecondJob
       steps: 
       - bash: echo Build First Job 
