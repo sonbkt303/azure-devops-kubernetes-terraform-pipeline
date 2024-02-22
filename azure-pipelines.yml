@@ -22,8 +22,8 @@ stages:
       - bash: echo AccessToken Enviroment $(System.AccessToken)
       - bash: echo Build Number $(Build.BuildNumber)
       - bash: echo SourceBranchName $(Build.SourceBranchName)
-      - bash: echo SourceDirectory $(Build.SourceDirectory)
-      - bash: echo ArtifactStagingDirectiory $(Build.ArtifactStagingDirectiory)
+      - bash: echo SourceDirectory $(Build.SourcesDirectory)
+      - bash: echo ArtifactStagingDirectory $(Build.ArtifactStagingDirectory)
 
     - job: SecondJob
       steps: 
