@@ -18,9 +18,9 @@ stages:
       steps: 
       - bash: echo Build First Job
       - bash: echo Directory Artifact $(Build.ArtifactStagingDirectory)
-    - job: SecondJob
-      steps: 
-      - bash: echo Build First Job 
+    # - job: SecondJob
+    #   steps: 
+    #   - bash: echo Build First Job 
   # - stage: DevDeploy
   #   dependsOn: Build
   #   jobs: 
