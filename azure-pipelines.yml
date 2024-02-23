@@ -23,6 +23,7 @@ stages:
       - bash: echo Build Number $(Build.BuildNumber)
       - bash: echo SourceBranchName $(Build.SourceBranchName)
       - bash: echo SourceDirectory $(Build.SourcesDirectory)
+      - bash: echo $(System.DefaultWorkingDirectory)
       - bash: echo ArtifactStagingDirectory $(Build.ArtifactStagingDirectory)
       - bash: ls -R $(System.DefaultWorkingDirectory)
       - bash: java -version
