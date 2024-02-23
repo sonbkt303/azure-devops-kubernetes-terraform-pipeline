@@ -24,31 +24,13 @@ stages:
       - bash: echo SourceBranchName $(Build.SourceBranchName)
       - bash: echo SourceDirectory $(Build.SourcesDirectory)
       - bash: echo $(System.DefaultWorkingDirectory)
-      - bash: echo ArtifactStagingDirectory $(Build.ArtifactStagingDirectory)
-      - bash: ls -R $(System.DefaultWorkingDirectory)
-      - bash: java -version
-
-    # - job: SecondJob
-    #   steps: 
-    #   - bash: echo Build First Job 
-  # - stage: DevDeploy
-  #   dependsOn: Build
-  #   jobs: 
-  #   - job: DevDeployJob
-  #     steps: 
-  #     - bash: echo $(envoroment)DevDeployJob
-  # - stage: QADeploy
-  #   dependsOn: Build
-  #   jobs: 
-  #   - job: QADeployJob
-  #     steps: 
-  #     - bash: echo QADeployJob
-  # - stage: ProdDeploy
-  #   dependsOn: 
-  #   - Build
-  #   - DevDeploy
-  #   - QADeploy
-  #   jobs: 
-  #   - job: ProdDeploy
-  #     steps: 
-  #     - bash: echo ProdDeploy
+      - bash: echo ArtifactStagingDirectory 
+      
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: '$(System.DefaultWorkingDirectory)'
+          Contents: |
+            **/*.yaml
+            **/*.tf
+          TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    
