@@ -25,6 +25,7 @@ stages:
       - bash: echo SourceDirectory $(Build.SourcesDirectory)
       - bash: echo ArtifactStagingDirectory $(Build.ArtifactStagingDirectory)
       - bash: ls -R $(System.DefaultWorkingDirectory)
+      - bash: java -version
 
     # - job: SecondJob
     #   steps: 
