@@ -25,6 +25,7 @@ stages:
       - bash: echo SourceDirectory $(Build.SourcesDirectory)
       - bash: echo $(System.DefaultWorkingDirectory)
       - bash: echo ArtifactStagingDirectory 
+      - bashL: echo Hello world
       
       - task: CopyFiles@2
         inputs:
