@@ -15,6 +15,6 @@ pool:
 
 # Pipelines > Stages > Jobs > Tasks(Steps)
 
-  steps:
-  - script: echo Running on $(operatingSystem) - Hello, world, changed!
-    displayName: 'Run a one-line script'
+steps:
+- script: echo Running on $(operatingSystem) - Hello, world, changed!
+  displayName: 'Run a one-line script'
