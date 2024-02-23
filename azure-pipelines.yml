@@ -33,4 +33,7 @@ stages:
             **/*.yaml
             **/*.tf
           TargetFolder: '$(Build.ArtifactStagingDirectory)'
+          retryCount: '2'
+      - bash: ls -R $(Build.ArtifactStagingDirectory)
+      
     
