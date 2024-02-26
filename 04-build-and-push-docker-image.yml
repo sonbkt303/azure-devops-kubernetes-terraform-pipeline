@@ -16,8 +16,7 @@ stages:
   jobs:  
   - job: Build
     displayName: Build
-    pool:
-      vmImage: 'EVN-EVN0031-W01'
+    pool: Default
     steps:
     - task: Docker@2
       inputs:
