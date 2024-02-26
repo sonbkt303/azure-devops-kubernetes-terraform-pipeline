@@ -1,8 +1,8 @@
 trigger:
 - master
 
-pool:
-  name: Default
+# pool:
+#   vmImage: 'ubuntu-latest'
 
 # resources:
 # - repo: self
