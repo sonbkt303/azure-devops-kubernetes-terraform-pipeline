@@ -6,12 +6,12 @@
 trigger:
 - master
 
-strategy: 
-  matrix: 
-    linux:
-      operatingSystem: 'ubuntu-latest' 
+# strategy: 
+#   matrix: 
+#     linux:
+#       operatingSystem: "ubuntu-latest"
 pool:
-  vmImage: $(operatingSystem)
+  vmImage: ubuntu-latest
 
 # Pipelines > Stages > Jobs > Tasks(Steps)
 
@@ -23,30 +23,22 @@ stages:
     - bash: echo "Do the build"
 - stage: DevDeploy
   jobs:
-  - job: BuildJob
-    steps: 
-    - bash: echo "Start Dev Deploy"
-  - deployment: DevDeployment
-    enviroment: Dev
+  - deployment: DevDeployJob
+    environment: Dev
     strategy:
-      runOne:
+      runOnce:
         deploy:
           steps:
-          - scrip: echo 'deploy to Dev'
-- stage: DevDeploy
+          - script: echo 'deploy to Dev'
+- stage: QADeploy
   jobs:
-  - job: BuildJob
-    steps: 
-    - bash: echo "Start Dev Deploy"
-  - deployment: DevDeployment
-    enviroment: Dev
+  - deployment: QADeployJob
+    environment: QA
     strategy:
-      runOne:
+      runOnce:
         deploy:
           steps:
-          - scrip: echo 'deploy to Dev'
-
-
+          - script: echo 'deploy to QA'
 
 # steps:
 # - script: echo Running on $(operatingSystem) - Hello, world, changed!
