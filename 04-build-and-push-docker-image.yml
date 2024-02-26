@@ -4,8 +4,8 @@ trigger:
 # pool:
 #   vmImage: 'ubuntu-latest'
 
-# resources:
-# - repo: self
+resources:
+- repo: self
 
 variables:
   tag: '$(Build.BuildId)'
