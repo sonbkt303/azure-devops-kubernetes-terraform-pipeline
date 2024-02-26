@@ -15,6 +15,39 @@ pool:
 
 # Pipelines > Stages > Jobs > Tasks(Steps)
 
-steps:
-- script: echo Running on $(operatingSystem) - Hello, world, changed!
-  displayName: 'Run a one-line script'
+stages:
+- stage: Build
+  jobs:
+  - job: BuildJob
+    steps:
+    - bash: echo "Do the build"
+- stage: DevDeploy
+  jobs:
+  - job: BuildJob
+    steps: 
+    - bash: echo "Start Dev Deploy"
+  - deployment: DevDeployment
+    enviroment: Dev
+    strategy:
+      runOne:
+        deploy:
+          steps:
+          - scrip: echo 'deploy to Dev'
+- stage: DevDeploy
+  jobs:
+  - job: BuildJob
+    steps: 
+    - bash: echo "Start Dev Deploy"
+  - deployment: DevDeployment
+    enviroment: Dev
+    strategy:
+      runOne:
+        deploy:
+          steps:
+          - scrip: echo 'deploy to Dev'
+
+
+
+# steps:
+# - script: echo Running on $(operatingSystem) - Hello, world, changed!
+#   displayName: 'Run a one-line script'
