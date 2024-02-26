@@ -1,10 +1,11 @@
 trigger:
 - master
 
-resources:
-- repo: self
 pool:
   name: Default
+
+resources:
+- repo: self
 
 variables:
   tag: '$(Build.BuildId)'
