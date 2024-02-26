@@ -17,7 +17,7 @@ stages:
   - job: Build
     displayName: Build
     pool:
-      vmImage: 'ubuntu-latest'
+      vmImage: 'EVN-EVN0031-W01'
     steps:
     - task: Docker@2
       inputs:
