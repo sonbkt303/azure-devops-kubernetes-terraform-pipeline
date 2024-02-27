@@ -17,14 +17,14 @@ stages:
   - job: Build
     displayName: Build
     pool: Default
-    steps:
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'Docker hub connection'
-        repository: 'kimsonbui/currency-exchange-devops'
-        command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
-        tags: '$(tag)'
+    # steps:
+    # - task: Docker@2
+    #   inputs:
+    #     containerRegistry: 'Docker hub connection'
+    #     repository: 'kimsonbui/currency-exchange-devops'
+    #     command: 'buildAndPush'
+    #     Dockerfile: '**/Dockerfile'
+    #     tags: '$(tag)'
         
     
     
