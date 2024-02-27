@@ -4,11 +4,42 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
-
-strategy: 
-  matrix: 
-    linux:
-      operatingSystem: 'ubuntu-latest' 
-pool:
-  vmImage: $(operatingSystem)
+  - master
+  
+  pool:
+    vmImage: 'ubuntu-latest'
+  
+  # Pipelines > Stages > Jobs > Tasks(Steps)
+  
+  stages: 
+    - stage: Build
+      jobs: 
+      - job: FirstJob
+        steps: 
+        - bash: echo Build First Job
+        - bash: echo Directory Artifact $(Build.ArtifactStagingDirectory) 
+        - bash: echo Enviroment Name $(Environment.Name)
+        - bash: echo AccessToken Enviroment $(System.AccessToken)
+        - bash: echo Build Number $(Build.BuildNumber)
+        - bash: echo SourceBranchName $(Build.SourceBranchName)
+        - bash: echo SourceDirectory $(Build.SourcesDirectory)
+        - bash: echo $(System.DefaultWorkingDirectory)
+        - bash: echo ArtifactStagingDirectory 
+        - bash: echo Hello world
+        
+        - task: CopyFiles@2
+          inputs:
+            SourceFolder: '$(System.DefaultWorkingDirectory)'
+            Contents: |
+              **/*.yaml
+              **/*.tf
+            TargetFolder: '$(Build.ArtifactStagingDirectory)'
+            retryCount: '2'
+        - bash: ls -R $(Build.ArtifactStagingDirectory)
+        
+        - task: PublishBuildArtifacts@1
+          inputs:
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+            ArtifactName: 'drop'
+            publishLocation: 'Container'
+  
