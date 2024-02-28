@@ -48,7 +48,7 @@ steps:
 #     backendAzureRmContainerName: 'your-container-name'
 #     backendAzureRmKey: 'state.tfstate'
 
-appendCommitMessageToRunName:
+# appendCommitMessageToRunName:
 # - task: TerraformTaskV4@4
 #   inputs:
 #     provider: 'azurerm'
