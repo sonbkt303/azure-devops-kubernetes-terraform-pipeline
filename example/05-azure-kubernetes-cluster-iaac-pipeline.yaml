@@ -18,8 +18,9 @@ steps:
 - script: echo "Hello world"
   displayName: "Run a one-line scripts"
   
-
-
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: 'azure-rsa.pub'
 - task: TerraformTaskV4@4
   inputs:
     provider: 'azurerm'
