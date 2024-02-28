@@ -55,3 +55,31 @@ create table exchange_value
 ```
 docker container run --publish 8000:8000 in28min/currency-exchange:0.0.1-SNAPSHOT
 ```
+
+
+Link: https://github.com/in28minutes/devops-master-class/blob/master/azure-devops/readme.md
+
+#### Create Service Account For Your Subscription To Create Azure K8S Cluster using Terraform
+
+```
+az login
+az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/<<azure_subscription_id>>"
+export TF_VAR_client_id=<<service_account_appId>>
+export TF_VAR_client_secret=<<service_account_password>>
+```
+
+#### Create Public Key for SSH Access
+
+```
+ssh-keygen -m PEM -t rsa -b 4096 # PEM - Privacy Enhanced Mail - Certificate Format RSA- Encryption Algorithm
+ls /Users/rangakaranam/.ssh/id_rsa.pub
+```
+
+#### Create Resource Group, Storage Account and Storage Container
+
+```
+az group create -l westeurope -n In28minutesK8sResourceGroup
+az storage account create -n In28minutesK8sStorageAccount -g In28minutesK8sResourceGroup -l westeurope --sku Standard_LRS
+az storage container create -n devterraformstatestorage --account-name <<storage_account_name>> --account-key <<storage_account_key>>
+
+```
