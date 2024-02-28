@@ -13,6 +13,35 @@ pool: Default # Agent hosted pool
 
 # Pipelines > Stages > Jobs > Tasks(Steps)
 
+
 steps: 
 - script: echo "Hello world"
   displayName: "Run a one-line scripts"
+  
+
+
+- task: TerraformTaskV4@4
+  inputs:
+    provider: 'azurerm'
+    backendServiceAWS: ''
+    backendAWSBucketName: ''
+    backendAWSKey: ''
+    backendServiceGCP: ''
+    backendGCPBucketName: ''
+    backendServiceArm: 'azure-resource-manager-service-connection'
+    command: 'init'
+    backendAzureRmResourceGroupName: 'terraform-backend-rg'
+    backendAzureRmStorageAccountName: 'storageaccountthansung1994'
+    backendAzureRmContainerName: 'storageaccountcontainer'
+    backendAzureRmKey: 'kubernetes-dev.tfstate'
+    
+# - task: TerraformTaskV4@4
+#   displayName: Initialize Terraform
+#   inputs:
+#     provider: 'azurerm'
+#     command: 'init'
+#     backendServiceArm: 'your-backend-service-connection'
+#     backendAzureRmResourceGroupName: 'your-rg-name'
+#     backendAzureRmStorageAccountName: 'your-stg-name'
+#     backendAzureRmContainerName: 'your-container-name'
+#     backendAzureRmKey: 'state.tfstate'
