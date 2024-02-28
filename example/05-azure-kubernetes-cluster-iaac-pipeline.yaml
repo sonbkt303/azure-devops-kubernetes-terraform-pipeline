@@ -6,8 +6,10 @@
 trigger:
 - master
 
-pool:
-  vmImage: 'Default'
+# pool:
+#   vmImage: 'ubuntu-latest'
+
+pool: Default # Agent hosted pool
 
 # Pipelines > Stages > Jobs > Tasks(Steps)
 
