@@ -18,44 +18,48 @@ steps:
 - script: echo "Hello world"
   displayName: "Run a one-line scripts"
   
+  
+# - task: DownloadSecureFile@1
+#   inputs:
+#     secureFile: 'azure-rsa.pub'
+# - task: TerraformTaskV4@4
+#   inputs:
+#     provider: 'azurerm'
+#     commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var client_id=$(client_id) -var ssh_public_key=$(ssh_public_key)'
+#     backendServiceAWS: ''
+#     backendAWSBucketName: ''
+#     backendAWSKey: ''
+#     backendServiceGCP: ''
+#     backendGCPBucketName: 
+#     backendServiceArm: 'azure-resource-manager-service-connection'
+#     command: 'init'
+#     backendAzureRmResourceGroupName: 'terraform-backend-rg'
+#     backendAzureRmStorageAccountName: 'storageaccountthansung1994'
+#     backendAzureRmContainerName: 'storageaccountcontainer'
+#     backendAzureRmKey: 'kubernetes-dev.tfstate'
+
+
 - task: DownloadSecureFile@1
+  name: publickKey
+  displayName: 'Download publick key'
   inputs:
     secureFile: 'azure-rsa.pub'
+    retryCount: 5
+
+
 - task: TerraformTaskV4@4
   inputs:
     provider: 'azurerm'
-    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var client_id=$(client_id) -var ssh_public_key=$(ssh_public_key)'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
+    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickKey)'
+    backendServiceArm: 'Azure subscription(44e3fb22-c762-4f5e-b485-f6b13f45f3bd)'
+    backendAzureRmResourceGroupName: 'test-rg'
+    backendAzureRmStorageAccountName: 'test-storage'
+    backendAzureRmContainerName: 'test-container'
+    backendAzureRmKey: 'kubernetes-dev.tfstate'
     backendServiceAWS: ''
     backendAWSBucketName: ''
     backendAWSKey: ''
     backendServiceGCP: ''
     backendGCPBucketName: 
-    backendServiceArm: 'azure-resource-manager-service-connection'
-    command: 'init'
-    backendAzureRmResourceGroupName: 'terraform-backend-rg'
-    backendAzureRmStorageAccountName: 'storageaccountthansung1994'
-    backendAzureRmContainerName: 'storageaccountcontainer'
-    backendAzureRmKey: 'kubernetes-dev.tfstate'
-    
-# - task: TerraformTaskV4@4
-#   displayName: Initialize Terraform
-#   inputs:
-#     provider: 'azurerm'
-#     command: 'init'
-#     backendServiceArm: 'your-backend-service-connection'
-#     backendAzureRmResourceGroupName: 'your-rg-name'
-#     backendAzureRmStorageAccountName: 'your-stg-name'
-#     backendAzureRmContainerName: 'your-container-name'
-#     backendAzureRmKey: 'state.tfstate'
-
-# appendCommitMessageToRunName:
-# - task: TerraformTaskV4@4
-#   inputs:
-#     provider: 'azurerm'
-#     command: 'init'
-#     commandOptions: '-var client_id=$(client_id)'
-#     backendServiceArm: 'azure-resource-manager-service-connection'
-#     backendAzureRmResourceGroupName: 'terraform-backend-rg'
-#     backendAzureRmStorageAccountName: 'storageaccountthansung1994'
-#     backendAzureRmContainerName: 'storageaccountcontainer'
-#     backendAzureRmKey: 'kubernetes-dev.tfstate'
