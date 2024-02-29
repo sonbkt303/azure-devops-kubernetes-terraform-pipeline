@@ -14,10 +14,6 @@ pool: Default # Agent hosted pool
 # Pipelines > Stages > Jobs > Tasks(Steps)
 
 
-steps: 
-- script: echo "Hello world"
-  displayName: "Run a one-line scripts"
-  
   
 # - task: DownloadSecureFile@1
 #   inputs:
@@ -38,7 +34,10 @@ steps:
 #     backendAzureRmContainerName: 'storageaccountcontainer'
 #     backendAzureRmKey: 'kubernetes-dev.tfstate'
 
-
+steps: 
+- script: echo "Hello world"
+  displayName: "Run a one-line scripts"
+  
 - task: DownloadSecureFile@1
   name: publickKey
   displayName: 'Download publick key'
