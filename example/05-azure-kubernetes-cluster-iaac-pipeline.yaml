@@ -45,6 +45,7 @@ steps:
     secureFile: 'azure-rsa.pub'
     retryCount: 5
 
+
 - task: TerraformTaskV4@4
   inputs:
     provider: 'azurerm'
