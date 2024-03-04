@@ -7,10 +7,15 @@ pool:
 steps:
 - script: echo K8S Terraform Azure!
   displayName: 'Run a one-line script'
+
+
 - task: DownloadSecureFile@1
-  name: publickey
+  name: publickKey
+  displayName: 'Download publick key'
   inputs:
-    secureFile: 'azure_rsa.pub'
+    secureFile: 'azure-rsa.pub'
+    retryCount: 5
+
 
 - task: TerraformCLI@0
   inputs:
