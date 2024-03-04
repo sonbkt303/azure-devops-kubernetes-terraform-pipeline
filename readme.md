@@ -57,7 +57,9 @@ docker container run --publish 8000:8000 in28min/currency-exchange:0.0.1-SNAPSHO
 ```
 
 
-Link: https://github.com/in28minutes/devops-master-class/blob/master/azure-devops/readme.md
+Link: 
+- https://github.com/in28minutes/devops-master-class/blob/master/azure-devops/readme.md
+- https://github.com/in28minutes/azure-devops-kubernetes-terraform-pipeline/blob/master/CourseUpdates/DevOps-Course-Updates.md#148step-03---creating-azure-devops-pipeline-for-azure-kubernetes-cluster-iaac
 
 #### Create Service Account For Your Subscription To Create Azure K8S Cluster using Terraform
 

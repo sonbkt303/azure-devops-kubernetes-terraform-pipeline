@@ -1,95 +1,40 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
-# trigger:
-# - master
-
-# # pool:
-# #   vmImage: 'ubuntu-latest'
-
-# pool: Default # Agent hosted pool
-
-# # Pipelines > Stages > Jobs > Tasks(Steps)
-# steps: 
-# - script: echo "Hello world"
-#   displayName: "Run a one-line scripts"
-  
-# - task: DownloadSecureFile@1
-#   name: publickKey
-#   displayName: 'Download publick key'
-#   inputs:
-#     secureFile: 'azure-rsa.pub'
-#     retryCount: 5
-
-# - task: TerraformTaskV4@4
-#   inputs:
-#     provider: 'azurerm'
-#     command: 'init'
-#     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
-#     commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickKey.secureFilePath)'
-#     backendServiceArm: 'Azure subscription(44e3fb22-c762-4f5e-b485-f6b13f45f3bd)'
-#     backendAzureRmResourceGroupName: 'terraform-backend-rg'
-#     backendAzureRmStorageAccountName: 'storageacctrangaxyz'
-#     backendAzureRmContainerName: 'storageacctrangacontainer'
-#     backendAzureRmKey: 'kubernetes-dev.tfstate'
-#     backendServiceAWS: ''
-#     backendAWSBucketName: ''
-#     backendAWSKey: ''
-#     backendServiceGCP: ''
-#     backendGCPBucketName: 
-
 trigger:
 - master
 
-pool: 'Default'
-# pool:
-#   vmImage: 'ubuntu-latest'
+pool:
+  vmImage: 'ubuntu-latest'
 
 steps:
 - script: echo K8S Terraform Azure!
   displayName: 'Run a one-line script'
-
-# - task: DownloadSecureFile@1
-#   name: publickey
-#   inputs:
-#     secureFile: 'azure-rsa.pub'
-
-# - task: TerraformCLI@0
-#   inputs:
-#     command: 'init'
-#     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
-#     commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
-#     backendType: 'azurerm'
-#     backendServiceArm: 'Azure subscription(44e3fb22-c762-4f5e-b485-f6b13f45f3bd)'
-#     ensureBackend: true
-#     backendAzureRmResourceGroupName: 'terraform-backend-rg'
-#     backendAzureRmResourceGroupLocation: 'westeurope'
-#     backendAzureRmStorageAccountName: 'storageacctrangaxyz'
-#     backendAzureRmContainerName: 'storageacctrangacontainer'
-#     backendAzureRmKey: 'kubernetes-dev.tfstate'
-
 - task: DownloadSecureFile@1
-  name: publickKey
-  displayName: 'Download publick key'
+  name: publickey
   inputs:
-    secureFile: 'azure-rsa.pub'
-    retryCount: 5
+    secureFile: 'azure_rsa.pub'
 
-- task: TerraformTaskV4@4
+- task: TerraformCLI@0
   inputs:
-    provider: 'azurerm'
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
-    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickKey.secureFilePath)'
-    backendServiceArm: 'Azure subscription(44e3fb22-c762-4f5e-b485-f6b13f45f3bd)'
+    # commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
+    backendType: 'azurerm'
+    backendServiceArm: 'azure-resource-manager-service-connection'
+    ensureBackend: true
     backendAzureRmResourceGroupName: 'terraform-backend-rg'
+    backendAzureRmResourceGroupLocation: 'westeurope'
     backendAzureRmStorageAccountName: 'storageacctrangaxyz'
     backendAzureRmContainerName: 'storageacctrangacontainer'
     backendAzureRmKey: 'kubernetes-dev.tfstate'
-    backendServiceAWS: ''
-    backendAWSBucketName: ''
-    backendAWSKey: ''
-    backendServiceGCP: ''
-    backendGCPBucketName: 
+
+- task: TerraformCLI@0
+  inputs:
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
+    environmentServiceName: 'azure-resource-manager-service-connection'
+    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
+
+# - task: TerraformCLI@0
+#   inputs:
+#     command: 'destroy'
+#     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
+#     environmentServiceName: 'azure-resource-manager-service-connection'
