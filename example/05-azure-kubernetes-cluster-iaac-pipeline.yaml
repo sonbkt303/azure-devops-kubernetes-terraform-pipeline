@@ -33,9 +33,11 @@ steps:
     backendAzureRmKey: 'kubernetes-dev.tfstate'
 
 - task: TerraformCLI@2
+  displayName: "Validate terraform"
   inputs:
     command: 'validate'
     allowTelemetryCollection: true
+  
 
 # - task: TerraformCLI@0
 #   inputs:
