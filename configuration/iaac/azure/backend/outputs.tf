@@ -13,3 +13,8 @@ output "storage_account_access_key" {
 output "storage_container_name" {
     value = azurerm_storage_container.storage_container.name
 }
+
+
+output "environment" {
+    value = var.environment
+}

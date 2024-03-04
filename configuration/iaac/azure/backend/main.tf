@@ -1,5 +1,5 @@
 provider "azurerm" {
-  version = "~> 1.42"
+  # version = "~> 1.42"
   client_id       = var.client_id   # ENVIRONMENT VARIABLE
   client_secret   = var.client_secret # ENVIRONMENT VARIABLE
   subscription_id = var.subscription_id
@@ -13,6 +13,7 @@ resource "azurerm_resource_group" "resource_group" {
   tags = {
     environment = var.environment
   }
+  
 }
 
 resource "azurerm_storage_account" "storage_account" {
