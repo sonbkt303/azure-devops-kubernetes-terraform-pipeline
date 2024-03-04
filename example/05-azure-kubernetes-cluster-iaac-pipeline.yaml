@@ -38,9 +38,6 @@ steps:
     command: 'validate'
     allowTelemetryCollection: true
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
 - task: TerraformCLI@2
   displayName: "Terraform plan"
   inputs:
@@ -49,31 +46,3 @@ steps:
     runAzLogin: true
     allowTelemetryCollection: true
   
-
-# - task: TerraformCLI@0
-#   inputs:
-#     command: 'apply'
-#     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
-#     environmentServiceName: 'Azure subscription(44e3fb22-c762-4f5e-b485-f6b13f45f3bd)'
-#     runAzLogin: true
-#     commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
-#     allowTelemetryCollection: true
-
-# - task: TerraformCLI@0
-#   inputs:
-#     command: 'destroy'
-#     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
-#     environmentServiceName: 'azure-resource-manager-service-connection'
-=======
->>>>>>> 43961af
-- task: TerraformCLI@0
-  inputs:
-    command: 'apply'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
-    environmentServiceName: 'Azure subscription(44e3fb22-c762-4f5e-b485-f6b13f45f3bd)'
-<<<<<<< HEAD
-    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
-=======
-    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
->>>>>>> dddf19f (update)
->>>>>>> 43961af
