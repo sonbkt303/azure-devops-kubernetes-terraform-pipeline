@@ -1,22 +1,15 @@
 trigger:
 - master
 
-# pool:
-#   vmImage: 'ubuntu-latest'
 pool: 'Default'
 
 steps:
 - script: echo K8S Terraform Azure!
   displayName: 'Run a one-line script'
-
-
 - task: DownloadSecureFile@1
-  name: publickKey
-  displayName: 'Download publick key'
+  name: publickey
   inputs:
-    secureFile: 'azure-rsa.pub'
-    retryCount: 5
-
+    secureFile: 'azure_rsa.pub'
 
 - task: TerraformCLI@0
   inputs:
@@ -32,12 +25,6 @@ steps:
     backendAzureRmContainerName: 'storageacctrangacontainer'
     backendAzureRmKey: 'kubernetes-dev.tfstate'
 
-- task: TerraformCLI@2
-  displayName: "Validate terraform"
-  inputs:
-    command: 'validate'
-    allowTelemetryCollection: true
-
 - task: TerraformCLI@0
   inputs:
     command: 'apply'
@@ -45,14 +32,8 @@ steps:
     environmentServiceName: 'Azure subscription(44e3fb22-c762-4f5e-b485-f6b13f45f3bd)'
     commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
 
-
-# - task: TerraformCLI@2
-#   displayName: "Terraform plan"
+# - task: TerraformCLI@0
 #   inputs:
-#     command: 'plan'
+#     command: 'destroy'
 #     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
-#     environmentServiceName: 'Azure subscription(44e3fb22-c762-4f5e-b485-f6b13f45f3bd)'
-#     runAzLogin: true
-#     # secureVarsFile: 'azure-rsa.pub'
-#     # commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
-#     allowTelemetryCollection: true
+#     environmentServiceName: 'azure-resource-manager-service-connection'
