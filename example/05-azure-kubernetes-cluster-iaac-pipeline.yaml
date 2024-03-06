@@ -46,5 +46,5 @@ steps:
     environmentServiceName: 'Azure subscription(44e3fb22-c762-4f5e-b485-f6b13f45f3bd)'
     runAzLogin: true
     secureVarsFile: 'azure-rsa.pub'
-    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
+    # commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
     allowTelemetryCollection: true
