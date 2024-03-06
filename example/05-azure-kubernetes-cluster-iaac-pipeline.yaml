@@ -47,4 +47,9 @@ steps:
     runAzLogin: true
     secureVarsFile: 'azure-rsa.pub'
     commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
+<<<<<<< HEAD
     allowTelemetryCollection: true
+=======
+    
+    
+>>>>>>> ecd8f28 (update)
