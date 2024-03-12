@@ -1,9 +1,6 @@
 trigger:
 - master
 
-# pool: 'Default'
-#   vmImage: 'ubuntu-latest'
-
 resources:
 - repo: self
 
@@ -16,7 +13,8 @@ stages:
   jobs:  
   - job: Build
     displayName: Build
-    pool: Default
+    pool:
+      vmImage: 'ubuntu-latest'
     steps:
     - task: Docker@2
       inputs:
@@ -25,6 +23,3 @@ stages:
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         tags: '$(tag)'
-        
-    
-    
