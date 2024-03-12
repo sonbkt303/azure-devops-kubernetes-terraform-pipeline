@@ -1,7 +1,7 @@
 trigger:
 - master
 
-pool: 'Default'
+# pool: 'Default'
 #   vmImage: 'ubuntu-latest'
 
 resources:
