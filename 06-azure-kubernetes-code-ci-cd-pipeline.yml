@@ -20,7 +20,7 @@ stages:
     steps:
     - task: Docker@2
       inputs:
-        containerRegistry: 'Docker hub connection'
+        containerRegistry: 'Docker-hub-connection'
         repository: 'kimsonbui/currency-exchange-devops'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
