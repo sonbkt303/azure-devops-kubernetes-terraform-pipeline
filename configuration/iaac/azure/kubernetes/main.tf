@@ -33,10 +33,19 @@ resource "azurerm_kubernetes_cluster" "terraform-k8s" {
   }
 }
 
+terraform {
+  required_providers {
+    azurerm = {
+      source = "hashicorp/azurerm"
+      version = "3.95.0"
+    }
+  }
+}
+
 provider "azurerm" {
-  features {}
-  subscription_id   = "Azure subscription(44e3fb22-c762-4f5e-b485-f6b13f45f3bd)"
-  alias             = "Test-001"
+  features {
+    
+  }
 }
 
 # terraform {
