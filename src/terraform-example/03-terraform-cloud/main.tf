@@ -1,9 +1,9 @@
 terraform {
   cloud {
-    organization = "terraform_beginer"
+    organization = "devops-directive"
 
     workspaces {
-      name = "learn-terraform-init"
+      name = "terraform-course"
     }
   }
 }
