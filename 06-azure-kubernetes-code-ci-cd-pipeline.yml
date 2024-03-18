@@ -36,3 +36,25 @@ stages:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
         ArtifactName: 'manifests'
         publishLocation: 'Container'
+        
+- stage: Deploy
+  displayName: "Deploy Image"
+  jobs:
+    - job: "Deploy"
+      displayName: "Deploy Image"
+      pool:
+        name: "Default"
+      steps:
+      - task: DownloadPipelineArtifact@2
+        inputs:
+          buildType: 'current'
+          artifactName: 'manifests'
+          itemPattern: '**/*.yaml'
+          targetPath: '$(System.ArtifactsDirectory)'
+      - task: KubernetesManifest@0
+        inputs:
+          action: 'deploy'
+          kubernetesServiceConnection: 'azure-kubernetes-connection'
+          namespace: 'default'
+          manifests: '$(System.ArtifactsDirectory)/configuration/kubernetes/deployment.yaml'
+          containers: 'kimsonbui/currency-exchange-devops:$(tag)'
